@@ -31,7 +31,14 @@ sum(joined$wtint2yr)
 # so, remember that an easy way to calculate a percentage is to take the mean of 
 # a binary (`0`, `1`) variable where `1` is a positive response. **Make sure** to 
 # properly deal with people who _chose not to repond_!
-#   
+
+
+ #  ******* Wrong  ********8888
+#per_day_prop <- sum(joined$alq151 == 1, na.rm = TRUE) / sum(joined$alq151 == 1 | joined$alq151 == 2, na.rm = TRUE)
+
+
+
+
 # 1. Using the codebook, find the question that asks about ever drinking have 4/5
 # or more drinks every day. Then, change the values in the response to make it
 # easier to calculate a percentage (see above).

@@ -33,7 +33,7 @@ sum(joined$wtint2yr)
 # properly deal with people who _chose not to repond_!
 
 
- #  ******* Wrong  ********8888
+
 #per_day_prop <- sum(joined$alq151 == 1, na.rm = TRUE) / sum(joined$alq151 == 1 | joined$alq151 == 2, na.rm = TRUE)
 
 
@@ -42,7 +42,13 @@ sum(joined$wtint2yr)
 # 1. Using the codebook, find the question that asks about ever drinking have 4/5
 # or more drinks every day. Then, change the values in the response to make it
 # easier to calculate a percentage (see above).
-# 
+
+joined$alq151[joined$alq151 == 2] <- 0
+joined$alq151[joined$alq151 == 7] <- NA
+joined$alq151[joined$alq151 == 9] <- NA
+
+mean(joined$alq151, na.rm = TRUE)
+
 # 2. Create a **survey design** that indicates the `id`, `strata`, and `weights`
 # of your dataset. Again, you'll need to see the codebook. This will also prompt
 # you to indicate that the strata are Nested (an R error will guide you through

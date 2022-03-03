@@ -47,15 +47,33 @@ joined$alq151[joined$alq151 == 2] <- 0
 joined$alq151[joined$alq151 == 7] <- NA
 joined$alq151[joined$alq151 == 9] <- NA
 
-mean(joined$alq151, na.rm = TRUE)
+
+
 
 # 2. Create a **survey design** that indicates the `id`, `strata`, and `weights`
 # of your dataset. Again, you'll need to see the codebook. This will also prompt
 # you to indicate that the strata are Nested (an R error will guide you through
 # this).
-# 
+
+nhanes_survey <- svydesign(
+  id = ~sdmvpsu,
+  nest = TRUE,
+  strata = ~sdmvstra,
+  weights = ~wtint2yr,
+  data = joined
+  
+)
+
 # 3. Using the `svymean` function, calculate the percentage of people that have
 # ever had more than 4/5 drinks per day.
-# 
+
+svymean(~alq151, nhanes_survey, na.rm = TRUE)
+
+
 # 4. Using the `svyby` function, get the percentage of respondents **by gender**
 # who have ever had more than 4/5 drinks per day
+
+svyby(~alq151, ~riagendr, nhanes_survey, svymean, na.rm = TRUE)
+
+
+
